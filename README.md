@@ -73,8 +73,8 @@ npm start
 Environment variable:
 
 - `NEXT_PUBLIC_API_BASE_URL`
-   - Dev default: `http://localhost:4000`
-   - Prod: set to your Worker URL, e.g. `https://mind-luster-api.<your-subdomain>.workers.dev`
+  - Dev default: `http://localhost:4000`
+  - Prod: set to your Worker URL, e.g. `https://mind-luster-api.<your-subdomain>.workers.dev`
 
 ### Architecture & Logic
 
@@ -87,14 +87,15 @@ Environment variable:
 ### API
 
 - Dev (json‑server):
-   - Base: `http://localhost:4000`
-   - Collection: `/tasks` supports `_start`, `_limit`, `_sort`, `_order`, `column`
-   - Tip: prefer `_start/_limit` over `_page/_limit`
+
+  - Base: `http://localhost:4000`
+  - Collection: `/tasks` supports `_start`, `_limit`, `_sort`, `_order`, `column`
+  - Tip: prefer `_start/_limit` over `_page/_limit`
 
 - Prod (Cloudflare Worker):
-   - Base: `https://mind-luster-api.<your-subdomain>.workers.dev`
-   - Endpoints: `GET/POST /tasks`, `GET/PATCH/DELETE /tasks/:id`, `GET /health`
-   - Query params: `_start`, `_limit`, `_sort=order,id`, `_order=asc,desc`, `column`, `q`
+  - Base: `https://mind-luster-api.<your-subdomain>.workers.dev`
+  - Endpoints: `GET/POST /tasks`, `GET/PATCH/DELETE /tasks/:id`, `GET /health`
+  - Query params: `_start`, `_limit`, `_sort=order,id`, `_order=asc,desc`, `column`, `q`
 
 ### Troubleshooting
 
@@ -150,20 +151,21 @@ Each subfolder has its own README with deeper details.
 Monorepo strategy: create two Netlify Sites from this single repo, each with a different base directory.
 
 - Kanban (Next.js):
-   - Netlify Site → Base directory: `mind-luster-kanban`
-   - Build: `npm run build`  |  Publish: `.next`
-   - Env: set `NEXT_PUBLIC_API_BASE_URL` to your Worker URL
+
+  - Netlify Site → Base directory: `mind-luster-kanban`
+  - Build: `npm run build` | Publish: `.next`
+  - Env: set `NEXT_PUBLIC_API_BASE_URL` to your Worker URL
 
 - jQuery app:
-   - Netlify Site → Base directory: `bonus-jquery`
-   - Build: (empty)  |  Publish: `.`
+  - Netlify Site → Base directory: `bonus-jquery`
+  - Build: (empty) | Publish: `.`
 
 Backend (free/no card): Cloudflare Workers + D1
 
 - See `cloudflare-worker/README.md` for:
-   - Creating the D1 DB and applying the schema
-   - Deploying the Worker (wrangler deploy)
-   - Optional seeding (`seeds.sql`)
+  - Creating the D1 DB and applying the schema
+  - Deploying the Worker (wrangler deploy)
+  - Optional seeding (`seeds.sql`)
 
 Custom domains
 

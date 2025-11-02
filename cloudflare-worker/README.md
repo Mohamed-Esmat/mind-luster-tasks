@@ -60,13 +60,14 @@ wrangler deploy
 
 For a quick start, create some tasks with POST requests, or write a small script to generate INSERTs from your `db.json` and pipe them through:
 
-
 6. Seed demo tasks (optional)
+
 ```bash
 # Load meaningful sample tasks so the UI looks populated
 wrangler d1 execute mind_luster_db --file=./seeds.sql --remote
 # Then browse: https://mind-luster-api....workers.dev/tasks?_start=0&_limit=20&_sort=order,id&_order=asc,desc
 ```
+
 ```bash
 wrangler d1 execute mind_luster_db --file=insert.sql
 ```

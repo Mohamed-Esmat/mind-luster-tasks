@@ -125,6 +125,7 @@ Example task:
 ## API Notes
 
 - Dev (json‑server):
+
   - Base: `http://localhost:4000`
   - Tasks: `GET /tasks` supports `?_start`, `?_limit`, `_sort`, `_order`, and field filters (e.g., `?column=backlog`)
   - Known quirk: `_page` can repeat results; prefer `_start`.
