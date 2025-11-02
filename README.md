@@ -21,7 +21,7 @@ This repository contains two small projects:
 Demo links:
 
 - Kanban Live: https://mind-luster-kanban-esmat.netlify.app/
-- jQuery Live: https://bonus-jquery-esmat.netlify.app/
+- jQuery Live: https://mind-luster-jquery-list-esmt.netlify.app/
 
 ---
 

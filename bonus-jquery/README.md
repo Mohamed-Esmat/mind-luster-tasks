@@ -51,7 +51,7 @@ npx serve -p 5173 .
 
 ## Demo
 
-- Live Demo: https://bonus-jquery-esmat.netlify.app/
+- Live Demo: https://mind-luster-jquery-list-esmt.netlify.app/
 
 Deploying to Netlify (monorepo):
 
