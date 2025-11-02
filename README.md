@@ -18,10 +18,10 @@ This repository contains two small projects:
 - Kanban App: `mind-luster-kanban`
 - jQuery App: `bonus-jquery`
 
-Demo links (replace with your deployments):
+Demo links:
 
-- Kanban Live: 'mind-luster-kanban-esmat.netlify.app/'
-- jQuery Live: bonus-jquery-esmat.netlify.app/`
+- Kanban Live: https://mind-luster-kanban-esmat.netlify.app/
+- jQuery Live: https://bonus-jquery-esmat.netlify.app/
 
 ---
 
@@ -45,7 +45,7 @@ An interactive Kanban board with four columns (Backlog, In Progress, Review, Don
 - @tanstack/react-query v5
 - Zustand for small UI state
 - axios
-- json‑server for the API (reads `db.json`)
+- API: json‑server (dev) and Cloudflare Workers + D1 (prod)
 
 ### How to run (development)
 
@@ -70,9 +70,11 @@ npm run build
 npm start
 ```
 
-Optional env var:
+Environment variable:
 
-- `NEXT_PUBLIC_API_BASE_URL` (defaults to `http://localhost:4000`)
+- `NEXT_PUBLIC_API_BASE_URL`
+   - Dev default: `http://localhost:4000`
+   - Prod: set to your Worker URL, e.g. `https://mind-luster-api.<your-subdomain>.workers.dev`
 
 ### Architecture & Logic
 
@@ -84,10 +86,15 @@ Optional env var:
 
 ### API
 
-- Base: `http://localhost:4000`
-- Collection: `/tasks`
-- Supported query params: `_start`, `_limit`, `_sort`, `_order`, and field filters like `?column=backlog`.
-- Tip: prefer `_start/_limit` over `_page/_limit` due to json‑server quirks.
+- Dev (json‑server):
+   - Base: `http://localhost:4000`
+   - Collection: `/tasks` supports `_start`, `_limit`, `_sort`, `_order`, `column`
+   - Tip: prefer `_start/_limit` over `_page/_limit`
+
+- Prod (Cloudflare Worker):
+   - Base: `https://mind-luster-api.<your-subdomain>.workers.dev`
+   - Endpoints: `GET/POST /tasks`, `GET/PATCH/DELETE /tasks/:id`, `GET /health`
+   - Query params: `_start`, `_limit`, `_sort=order,id`, `_order=asc,desc`, `column`, `q`
 
 ### Troubleshooting
 
@@ -135,6 +142,33 @@ npx serve -p 5173 .
 - `bonus-jquery/` — standalone jQuery demo
 
 Each subfolder has its own README with deeper details.
+
+---
+
+## Deploying (Netlify + Cloudflare Workers)
+
+Monorepo strategy: create two Netlify Sites from this single repo, each with a different base directory.
+
+- Kanban (Next.js):
+   - Netlify Site → Base directory: `mind-luster-kanban`
+   - Build: `npm run build`  |  Publish: `.next`
+   - Env: set `NEXT_PUBLIC_API_BASE_URL` to your Worker URL
+
+- jQuery app:
+   - Netlify Site → Base directory: `bonus-jquery`
+   - Build: (empty)  |  Publish: `.`
+
+Backend (free/no card): Cloudflare Workers + D1
+
+- See `cloudflare-worker/README.md` for:
+   - Creating the D1 DB and applying the schema
+   - Deploying the Worker (wrangler deploy)
+   - Optional seeding (`seeds.sql`)
+
+Custom domains
+
+- Netlify: add subdomains (e.g., kanban.yourdomain.com, list.yourdomain.com) and create CNAMEs pointing to the Netlify site URLs
+- Workers: optionally add a route like `api.yourdomain.com/*` that maps to your Worker
 
 ---
 

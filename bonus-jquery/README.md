@@ -13,9 +13,11 @@ A tiny, dependency‑free jQuery app that demonstrates a dynamic list with add/d
 ## How to Run
 
 Option 1 (open directly):
+
 - Open `index.html` in your browser
 
 Option 2 (serve locally):
+
 ```bash
 # from this folder
 npx serve -p 5173 .
@@ -49,6 +51,13 @@ npx serve -p 5173 .
 
 ## Demo
 
-- Live Demo: 'bonus-jquery-esmat.netlify.app/'
+- Live Demo: https://bonus-jquery-esmat.netlify.app/
 
-Replace the placeholder with your GitHub Pages or any static host URL.
+Deploying to Netlify (monorepo):
+
+- Create a new Netlify Site from this repository
+- Base directory: `bonus-jquery`
+- Build command: (leave empty)
+- Publish directory: `.`
+
+Alternatively, GitHub Pages also works—publish the `bonus-jquery` subfolder to Pages.
