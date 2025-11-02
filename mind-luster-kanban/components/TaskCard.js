@@ -31,6 +31,11 @@ export default function TaskCard({ task, columnId }) {
     transition: transition || "transform 220ms cubic-bezier(0.2, 0, 0, 1)",
     cursor: "grab",
     willChange: "transform",
+    userSelect: "none",
+    WebkitUserSelect: "none",
+    WebkitTapHighlightColor: "transparent",
+    // Prevent the browser from hijacking touch gestures during an active drag
+    touchAction: isDragging ? "none" : undefined,
   };
 
   return (

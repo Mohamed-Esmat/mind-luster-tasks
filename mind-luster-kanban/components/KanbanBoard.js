@@ -29,8 +29,19 @@ export default function KanbanBoard() {
   const openCreate = useUIStore((s) => s.openCreate);
   const dialogKey = useUIStore((s) => s.dialogKey);
   const search = useUIStore((s) => s.search);
+  const isTouchDevice =
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window || (navigator && navigator.maxTouchPoints > 0));
+
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    // On touch devices, prefer a short press delay so scroll works naturally
+    // and drag starts only after a brief hold. On desktop, use a small distance.
+    useSensor(
+      PointerSensor,
+      isTouchDevice
+        ? { activationConstraint: { delay: 180, tolerance: 8 } }
+        : { activationConstraint: { distance: 6 } }
+    ),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
   const updateMut = useMutation({
