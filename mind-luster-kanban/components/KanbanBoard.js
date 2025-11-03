@@ -11,6 +11,7 @@ import {
   DragOverlay,
   pointerWithin,
   PointerSensor,
+  TouchSensor,
   KeyboardSensor,
   useSensor,
   useSensors,
@@ -34,14 +35,15 @@ export default function KanbanBoard() {
     ("ontouchstart" in window || (navigator && navigator.maxTouchPoints > 0));
 
   const sensors = useSensors(
-    // On touch devices, prefer a short press delay so scroll works naturally
-    // and drag starts only after a brief hold. On desktop, use a small distance.
-    useSensor(
-      PointerSensor,
-      isTouchDevice
-        ? { activationConstraint: { delay: 180, tolerance: 8 } }
-        : { activationConstraint: { distance: 6 } }
-    ),
+    // Register both Touch and Pointer sensors; the first matching sensor wins.
+    // Order matters: TouchSensor first ensures mobile devices use the press
+    // delay/tolerance and don't accidentally scroll-hijack the gesture.
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 180, tolerance: 8 },
+    }),
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 6 },
+    }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
   const updateMut = useMutation({

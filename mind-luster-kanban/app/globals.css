@@ -39,4 +39,7 @@ body {
 .kanban-scroll {
   scrollbar-color: rgba(9, 30, 66, 0.3) transparent; /* Firefox */
   scrollbar-width: thin;
+  /* Allow natural vertical scrolling on touch devices while we use a
+     short press delay to initiate drag */
+  touch-action: pan-y;
 }

@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useUIStore } from "../lib/store";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -34,6 +35,7 @@ export default function TaskCard({ task, columnId }) {
     userSelect: "none",
     WebkitUserSelect: "none",
     WebkitTapHighlightColor: "transparent",
+    WebkitTouchCallout: "none",
     // Prevent the browser from hijacking touch gestures during an active drag
     touchAction: isDragging ? "none" : undefined,
   };
@@ -41,8 +43,6 @@ export default function TaskCard({ task, columnId }) {
   return (
     <Card
       ref={setNodeRef}
-      {...attributes}
-      {...listeners}
       variant="outlined"
       sx={{
         mb: 1.25,
@@ -60,6 +60,17 @@ export default function TaskCard({ task, columnId }) {
       style={style}
     >
       <CardHeader
+        avatar={
+          <IconButton
+            aria-label="drag"
+            size="small"
+            sx={{ cursor: isDragging ? "grabbing" : "grab", mr: 0.5 }}
+            {...attributes}
+            {...listeners}
+          >
+            <DragIndicatorIcon fontSize="small" />
+          </IconButton>
+        }
         title={task.title}
         titleTypographyProps={{ variant: "subtitle1" }}
         action={
