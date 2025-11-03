@@ -11,22 +11,22 @@
       "id": "2",
       "title": "Build auth flow",
       "description": "Login, Register, Forgot password",
-      "column": "review",
-      "order": 1762028046995
+      "column": "backlog",
+      "order": 1762177659471
     },
     {
       "id": "3",
       "title": "Code review setup",
       "description": "Add PR template and branch rules",
-      "column": "review",
-      "order": 1762028046986
+      "column": "in-progress",
+      "order": 1762177328064
     },
     {
       "id": "4",
       "title": "Project scaffolding",
       "description": "Set up Next.js and tooling",
-      "column": "review",
-      "order": 1762028046974.75
+      "column": "in-progress",
+      "order": 1762177326528
     },
     {
       "id": "4263",
@@ -53,8 +53,8 @@
       "id": "969f",
       "title": "ff",
       "description": "ddd",
-      "column": "review",
-      "order": 1762028046972.5
+      "column": "in-progress",
+      "order": 1762177328576
     },
     {
       "id": "b753",
@@ -74,8 +74,8 @@
       "id": "d3bb",
       "title": "test3",
       "description": "test3",
-      "column": "review",
-      "order": 1762028046977
+      "column": "in-progress",
+      "order": 1762177327552
     }
   ]
 }
